@@ -26,8 +26,6 @@ class PullAndPush extends StatefulWidget{
   PullAndPush({
     @required this.loadData,
     @required this.scrollPhysicsChanged,
-    //this.pullToRefreshTopHeader,
-    //this.pullToRefreshBottomHeader,
     this.backgroundColor:Colors.grey,
     this.tipText:"松手即可刷新",
     this.refreshIconPath:"images/refresh.png",
