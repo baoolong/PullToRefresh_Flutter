@@ -1,11 +1,18 @@
 # pulltorefresh
+[![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
 A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets
 
 <img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>
 
 ## Usage
+Add this to your package's pubspec.yaml file:
 
+	dependencies:pulltorefresh_flutter: "^0.0.2"
+	
+Add it to your dart file:
+
+	import 'package:pulltorefresh_flutter/pulltorefresh_flutter.dart';
 ## Example
     class PullAndPushTestState extends State<PullAndPushTest>{
 	  	List<String> addStrs=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
