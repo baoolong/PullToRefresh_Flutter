@@ -10,6 +10,9 @@ Add this to your package's pubspec.yaml file:
 
 	dependencies:pulltorefresh_flutter: "^0.0.2"
 	
+	assets:
+	  - images/refresh.png
+	
 Add it to your dart file:
 
 	import 'package:pulltorefresh_flutter/pulltorefresh_flutter.dart';
