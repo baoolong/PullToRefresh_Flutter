@@ -8,7 +8,8 @@ A control that make the ScrollView to be pull to refresh and push  to load data.
 ## Usage
 Add this to your package's pubspec.yaml file:
 
-	dependencies:pulltorefresh_flutter: "^0.0.2"
+	dependencies:
+	  pulltorefresh_flutter: "^0.0.2"
 	
 	assets:
 	  - images/refresh.png
