@@ -9,10 +9,13 @@ A control that make the ScrollView to be pull to refresh and push  to load data.
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.0.2"
-	
-	assets:
-	  - images/refresh.png
+	  pulltorefresh_flutter: "^0.0.3"
+	  
+If you want to use the default refresh image of this project (the rotated image), please download https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png to your images folder, and Pubspec.yaml is declared as follows.
+If you want to use other images, put the image in the Images folder, declare it in the Pubspec.yaml file, and add the property refreshIconPath in the PullAndPush class.
+
+     assets:
+       - images/refresh.png
 	
 Add it to your dart file:
 
