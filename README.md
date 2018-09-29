@@ -1,7 +1,13 @@
 # pulltorefresh
 [![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
+上下拉控件，理论上适配所有可滑动View
+
 A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets
+
+HomePage：[https://github.com/baoolong/PullToRefresh_Flutter](https://github.com/baoolong/PullToRefresh_Flutter)
+
+MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/OpenFlutter/PullToRefresh)
 
 <img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>
 
@@ -9,7 +15,7 @@ A control that make the ScrollView to be pull to refresh and push  to load data.
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.0.3"
+	  pulltorefresh_flutter: "^0.0.4"
 	  
 If you want to use the default refresh image of this project (the rotated image), please download https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png to your images folder, and Pubspec.yaml is declared as follows.
 If you want to use other images, put the image in the Images folder, declare it in the Pubspec.yaml file, and add the property refreshIconPath in the PullAndPush class.
