@@ -1,6 +1,6 @@
 name: pulltorefresh_flutter
 description: A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets
-version: 0.0.4
+version: 0.1.1
 author: baoolong <baoolong1987@gmail.com>
 homepage: https://github.com/baoolong/PullToRefresh_Flutter
 

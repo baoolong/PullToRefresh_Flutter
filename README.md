@@ -15,7 +15,7 @@ MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/O
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.0.4"
+	  pulltorefresh_flutter: "^0.1.1"
 	  
 If you want to use the default refresh image of this project (the rotated image), please download https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png to your images folder, and Pubspec.yaml is declared as follows.
 
@@ -101,7 +101,7 @@ Sometimes the ListView has too few items to cover the screen, making the ListVie
 ## LICENSE
     MIT License
 
-	Copyright (c) 2018 Jpeng
+	Copyright (c) 2018 baoolong
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
