@@ -1,9 +1,11 @@
 # pulltorefresh
 [![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
-上下拉控件，理论上适配所有可滑动View,Android IOS 双平台通用.
+上下拉控件，理论上适配所有可滑动View,Android IOS 双平台通用.上下拉分别可控，可单独使用上拉或下拉
 
-A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets,can Compatible with Android and IOS
+A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets.
+
+Pull and push are separately controllable,can Compatible with Android and IOS
 
 HomePage：[https://github.com/baoolong/PullToRefresh_Flutter](https://github.com/baoolong/PullToRefresh_Flutter)
 
@@ -15,7 +17,7 @@ MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/O
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.1.2"
+	  pulltorefresh_flutter: "^0.1.3"
 	  
 If you want to use the default refresh image of this project (the rotated image), please download https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png to your images folder, and Pubspec.yaml is declared as follows.
 
@@ -47,6 +49,8 @@ Add it to your dart file:
 	          title: new Text("上下拉刷新"),
 	        ),
 	        body: new PullAndPush(
+              isShowLeadingGlow: true,
+              isPullEnable: false,
 	          listView: new ListView.builder(
 	            //ListView的Item
 	            itemCount: strs.length,//+2,

@@ -1,3 +1,7 @@
+## [0.1.3] - 2018.10.18 PM
+
+* Pull and push are separately controllable
+
 ## [0.1.2] - 2018.10.18
 
 * Compatibility with ios

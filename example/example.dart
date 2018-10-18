@@ -33,6 +33,8 @@ class PullAndPushTestState extends State<PullAndPushTest>{
         title: new Text("上下拉刷新"),
       ),
       body: new PullAndPush(
+        isShowLeadingGlow: true,
+        isPullEnable: false,
         listView: new ListView.builder(
           //ListView的Item
           itemCount: initialStrings.length,//+2,
@@ -75,7 +77,8 @@ class PullAndPushTestState extends State<PullAndPushTest>{
           setState(() {
             scrollPhysics=physics;
           });
-        },)
+        },
+      )
     );
   }
 }
