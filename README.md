@@ -1,9 +1,9 @@
 # pulltorefresh
 [![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
-上下拉控件，理论上适配所有可滑动View
+上下拉控件，理论上适配所有可滑动View,Android IOS 双平台通用.
 
-A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets
+A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets,can Compatible with Android and IOS
 
 HomePage：[https://github.com/baoolong/PullToRefresh_Flutter](https://github.com/baoolong/PullToRefresh_Flutter)
 
@@ -15,7 +15,7 @@ MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/O
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.1.1"
+	  pulltorefresh_flutter: "^0.1.2"
 	  
 If you want to use the default refresh image of this project (the rotated image), please download https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png to your images folder, and Pubspec.yaml is declared as follows.
 
@@ -32,7 +32,8 @@ Add it to your dart file:
 	  	List<String> addStrs=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 	  	List<String> strs=["1","2","3","4","5","6","7","8","9","0"];
 	  	ScrollController controller=new ScrollController();
-	  	ScrollPhysics scrollPhysics=new AlwaysScrollableScrollPhysics();
+	  	//For compatibility with ios ,must use RefreshAlwaysScrollPhysics ;为了兼容ios 必须使用RefreshAlwaysScrollPhysics
+        ScrollPhysics scrollPhysics=new RefreshAlwaysScrollPhysics();
 	  	//使用系统的请求
 	  	var httpClient = new HttpClient();
 	  	var url = "https://github.com/";
@@ -94,9 +95,9 @@ Add it to your dart file:
 	  }
 
 ## Notice
-有时ListView的Item太少而不能铺满屏幕，导致ListView 不可Scroll，PullToRefresh也不可使用，所以ScrollPhysics必须是AlwaysScrollableScrollPhysics。
+有时ListView的Item太少而不能铺满屏幕，导致ListView 不可Scroll，PullToRefresh也不可使用，同时为了兼容IOS，所以ScrollPhysics必须是RefreshAlwaysScrollPhysics。
 
-Sometimes the ListView has too few items to cover the screen, making the ListView not scrollable, and PullToRefresh is not available, so ScrollPhysics must be AlwaysScrollableScrollPhysics.
+Sometimes the ListView has too few items to cover the screen, making the ListView not scrollable, PullToRefresh is not available , and for Compatible with IOS,so ScrollPhysics must be RefreshAlwaysScrollPhysics.
 
 ## LICENSE
     MIT License
