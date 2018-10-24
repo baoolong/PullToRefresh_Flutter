@@ -1,11 +1,11 @@
 # pulltorefresh
 [![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
-上下拉控件，理论上适配所有可滑动View, Android IOS 双平台通用. 上下拉分别可控， 可单独使用上拉或下拉
+上下拉控件，理论上适配所有可滑动View, Android IOS 双平台通用. 上下拉分别可控， 可单独使用上拉或下拉； 现已支持上下拉头完全自定义
 
 如果使用当中有什么问题，请在github里提出个issues,thankYou
 
-A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets.
+A control that make the ScrollView to be pull to refresh and push  to load data.Theoretically compatible with all Scrollable Widgets.RefreshBox now supports full customization
 
 Pull and push are separately controllable,can Compatible with Android and IOS
 
@@ -17,13 +17,15 @@ MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/O
 
 My organization's github：[https://github.com/OpenFlutter](https://github.com/OpenFlutter)
 
-<img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>        <img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20181023_90359.gif"/>
+<img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>
+
+<img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20181023_90359.gif"/>
 
 ## Usage
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.1.4"
+	  pulltorefresh_flutter: "^0.1.6"
 	  
 如果使用本项目默认图片，请下载https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png到你的images文件夹下，并在Pubspec.yaml添加如下配置
 	  
@@ -67,6 +69,8 @@ Add it to your dart file:
       String customRefreshBoxIconPath="images/icon_arrow.png";
       AnimationController customBoxWaitAnimation;
       double rotationAngle=0.0;
+      String customHeaderTipText="快尼玛给老子松手！";
+      String defaultRefreshBoxTipText="快尼玛给老子松手！";
     
     
       @override
@@ -86,36 +90,36 @@ Add it to your dart file:
               //如果你headerRefreshBox和footerRefreshBox全都自定义了，则default**系列的属性均无效，假如有一个RefreshBox是用默认的（在该RefreshBox Enable的情况下）则default**系列的属性均有效
               //If your headerRefreshBox and footerRefreshBox are all customizable，then the default** attributes of the series are invalid，
               // If there is a RefreshBox is the default（In the case of the RefreshBox Enable）then the default** attributes of the series are valid
-              defaultRefreshBoxTipText: "正在加载，请等待！",
+              defaultRefreshBoxTipText: defaultRefreshBoxTipText,
               headerRefreshBox: new Container(
-                  color: Colors.black54,
+                  color: Colors.grey,
                   child:  new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Align(
                         alignment: Alignment.centerLeft,
-                        child: new ClipRect(
-                          child: new Transform(
-                            origin: new Offset(45.0/2, 45.0/2),
-                            transform: Matrix4.rotationX(rotationAngle),
-                            child: new RotationTransition( //布局中加载时动画的weight
+                        child: new Transform(
+                          origin: new Offset(45.0/2, 45.0/2),
+                          transform: Matrix4.rotationX(rotationAngle),
+                          child: new RotationTransition( //布局中加载时动画的weight
+                            child: new ClipRect(
                               child: new Image.asset(
                                 customRefreshBoxIconPath,
                                 height: 45.0,
                                 width: 45.0,
                               ),
-                              turns: new Tween(
-                                  begin: 100.0,
-                                  end: 0.0
-                              )
-                                  .animate(customBoxWaitAnimation)
-                                ..addStatusListener((animationStatus) {
-                                  if (animationStatus == AnimationStatus.completed) {
-                                    customBoxWaitAnimation.repeat();
-                                  }
-                                }
-                                ),
                             ),
+                            turns: new Tween(
+                                begin: 100.0,
+                                end: 0.0
+                            )
+                                .animate(customBoxWaitAnimation)
+                              ..addStatusListener((animationStatus) {
+                                if (animationStatus == AnimationStatus.completed) {
+                                  customBoxWaitAnimation.repeat();
+                                }
+                              }
+                              ),
                           ),
                         ),
                       ),
@@ -123,51 +127,52 @@ Add it to your dart file:
                       new Align(
                         alignment: Alignment.centerRight,
                         child:new ClipRect(
-                          child:new Text("快尼玛给老子松手！",style: new TextStyle(fontSize: 18.0,color: Color(0xffe6e6e6)),),
+                          child:new Text(customHeaderTipText,style: new TextStyle(fontSize: 18.0,color: Color(0xffe6e6e6)),),
                         ),
                       ),
                     ],
                   )
               ),
     
-              //你也可以自定义底部的刷新栏；you can customize the fotter refresh box
-    
+              //你也可以自定义底部的刷新栏；you can customize the bottom refresh box
               animationStateChangedCallback:(AnimationStates animationStates,RefreshBoxDirectionStatus refreshBoxDirectionStatus){
                 switch (animationStates){
-                //RefreshBox高度没有达到50，上下拉刷新不可用（此状态下RefreshBox会自动弹回去）；RefreshBox height not reached 50，the function of load data is not available（In this state RefreshBox Will automatically bounce back）
-                  case AnimationStates.DragAndRefreshNotEnabled:
-                    break;
-    
                 //RefreshBox高度达到50,上下拉刷新可用;RefreshBox height reached 50，the function of load data is  available
                   case AnimationStates.DragAndRefreshEnabled:
                     setState(() {
-                      //3.141592653589793是弧度，角度为180度；3.141592653589793 is radians，angle is 180⁰
+                      //3.141592653589793是弧度，角度为180度,旋转180度；3.141592653589793 is radians，angle is 180⁰，Rotate 180⁰
                       rotationAngle=3.141592653589793;
-                    });
-                    break;
-    
-                //抬起手指后。RefreshBox 弹回到50的高度，的过程；After lifting your finger，the process of RefreshBox bounce back to the height of 50，
-                  case AnimationStates.ReboundToBoxHeight:
-                    setState(() {
-                      customRefreshBoxIconPath="images/refresh.png";
                     });
                     break;
     
                 //开始加载数据时；When loading data starts
                   case AnimationStates.StartLoadData:
+                    setState(() {
+                      customRefreshBoxIconPath="images/refresh.png";
+                      customHeaderTipText="正尼玛在拼命加载.....";
+                    });
                     customBoxWaitAnimation.forward();
                     break;
     
-                //加载完数据并RefreshBox开始消失时；After loading the data and the RefreshBox begins to disappear
-                  case AnimationStates.LoadDataEndAndBoxDisappear:
+                //加载完数据时；RefreshBox会留在屏幕2秒，并不马上消失，这里可以提示用户加载成功或者失败
+                // After loading the data，RefreshBox will stay on the screen for 2 seconds, not disappearing immediately，Here you can prompt the user to load successfully or fail.
+                  case AnimationStates.LoadDataEnd:
                     customBoxWaitAnimation.reset();
+                    setState(() {
+                      rotationAngle = 0.0;
+                      if(refreshBoxDirectionStatus==RefreshBoxDirectionStatus.PULL) {
+                        customRefreshBoxIconPath = "images/icon_cry.png";
+                        customHeaderTipText = "加载失败！请重试";
+                      }else if(refreshBoxDirectionStatus==RefreshBoxDirectionStatus.PUSH){
+                        defaultRefreshBoxTipText="可提示用户加载成功Or失败";
+                      }
+                    });
                     break;
     
                 //RefreshBox已经消失，并且闲置；RefreshBox has disappeared and is idle
                   case AnimationStates.RefreshBoxIdle:
-                    print("------");
                     setState(() {
-                      rotationAngle=0.0;
+                      defaultRefreshBoxTipText=customHeaderTipText="快尼玛给老子松手！";
                       customRefreshBoxIconPath="images/icon_arrow.png";
                     });
                     break;
@@ -180,7 +185,6 @@ Add it to your dart file:
                   physics: scrollPhysics,
                   itemBuilder: (BuildContext context,int index){
                     return new Container(
-                      color: Colors.black54,
                       height: 35.0,
                       child: new Center(
                         child: new Text(strs[index],style: new TextStyle(fontSize: 18.0),),
@@ -275,20 +279,14 @@ Add it to your dart file:
     
 ####      animationStateChangedCallback
     动画各种状态下的回调；Animation callbacks in various states
-        DragAndRefreshNotEnabled,： 
-        //RefreshBox高度没有达到50，上下拉刷新不可用（此状态下RefreshBox会自动弹回去）；RefreshBox height not reached 50，the function of load data is not available（In this state RefreshBox Will automatically bounce back）
-    
         DragAndRefreshEnabled,
         //RefreshBox高度达到50,上下拉刷新可用;RefreshBox height reached 50，the function of load data is  available
-        
-        ReboundToBoxHeight,
-        //抬起手指后。RefreshBox 弹回到50的高度，的过程；After lifting your finger，the process of RefreshBox bounce back to the height of 50，
         
         StartLoadData,
         //开始加载数据时；When loading data starts
         
-        LoadDataEndAndBoxDisappear,
-        //加载完数据并RefreshBox开始消失时；After loading the data and the RefreshBox begins to disappear
+        LoadDataEnd,
+        //加载完数据时；RefreshBox会留在屏幕2秒，并不马上消失，After loading the data，RefreshBox will stay on the screen for 2 seconds, not disappearing immediately
         
         RefreshBoxIdle
         //RefreshBox已经消失，并且闲置；RefreshBox has disappeared and is idle
