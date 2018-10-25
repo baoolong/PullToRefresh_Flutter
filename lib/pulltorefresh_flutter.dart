@@ -74,12 +74,12 @@ class PullAndPush extends StatefulWidget{
   );
 
   @override
-  State<StatefulWidget> createState() {
+  PullAndPushState createState() {
     return new PullAndPushState();
   }
 }
 
-class PullAndPushState extends State<PullAndPush> with TickerProviderStateMixin{
+class PullAndPushState extends State<PullAndPush> with TickerProviderStateMixin<PullAndPush>{
 
   double topItemHeight=0.0;
   double bottomItemHeight=0.0;
