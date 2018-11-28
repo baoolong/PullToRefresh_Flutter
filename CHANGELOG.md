@@ -1,3 +1,7 @@
+## [0.1.7] - 2018.11.28
+
+* Fix some issues
+
 ## [0.1.6] - 2018.10.24
 
 * RefreshBox adds the status of data loading success
