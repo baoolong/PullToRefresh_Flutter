@@ -10,11 +10,9 @@ A control that make the ScrollView to be pull to refresh and push  to load data.
 
 If there is any problem with the use, please submit an issue in github,thankYou
 
-#### HomePage：[https://github.com/baoolong/PullToRefresh_Flutter](https://github.com/baoolong/PullToRefresh_Flutter)
-
-#### MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/OpenFlutter/PullToRefresh)
-
 #### My organization's github：[https://github.com/OpenFlutter](https://github.com/OpenFlutter)
+
+#### Contact Me ：OpenFlutter QQ群 892398530
 
 <img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>
 
@@ -24,7 +22,7 @@ If there is any problem with the use, please submit an issue in github,thankYou
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.1.7"
+	  pulltorefresh_flutter: "^0.1.8"
 	  
 如果使用本项目默认图片，请下载 [https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png](https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png) 到你的images文件夹下，并在Pubspec.yaml添加如下配置
 	  

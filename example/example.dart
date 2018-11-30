@@ -98,14 +98,13 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
             new Align(
               alignment: Alignment.centerLeft,
               child: new RotatedBox(
-//                origin: new Offset(45.0/2, 45.0/2),
-//                transform: Matrix4.rotationX(rotationAngle),
                 quarterTurns: rotationAngle,
                 child: new RotationTransition( //布局中加载时动画的weight
                   child: new Image.asset(
                     customRefreshBoxIconPath,
                     height: 45.0,
                     width: 45.0,
+                    fit:BoxFit.cover,
                   ),
                   turns: new Tween(
                       begin: 100.0,
