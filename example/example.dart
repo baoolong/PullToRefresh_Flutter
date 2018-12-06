@@ -34,6 +34,8 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
   int rotationAngle=0;
   String customHeaderTipText="快尼玛给老子松手！";
   String defaultRefreshBoxTipText="快尼玛给老子松手！";
+  ///button等其他方式，通过方法调用触发下拉刷新
+  TriggerPullController triggerPullController=new TriggerPullController();
 
 
   @override
@@ -41,7 +43,12 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
     super.initState();
     //这个是刷新时控件旋转的动画，用来使刷新的Icon动起来
     customBoxWaitAnimation=new AnimationController(duration: const Duration(milliseconds: 1000*100), vsync: this);
+    //第一次layout后会被调用
+    //WidgetsBinding.instance.addPostFrameCallback((context){
+    //  triggerPullController.triggerPull();
+    //});
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +62,7 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
           // If there is a RefreshBox is the default（In the case of the RefreshBox Enable）then the default** attributes of the series are valid
           defaultRefreshBoxTipText: defaultRefreshBoxTipText,
           headerRefreshBox: _getCustomHeaderBox(),
+          triggerPullController:triggerPullController,
 
           //你也可以自定义底部的刷新栏；you can customize the bottom refresh box
           animationStateChangedCallback:(AnimationStates animationStates,RefreshBoxDirectionStatus refreshBoxDirectionStatus){
@@ -66,7 +74,7 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
               controller: controller,
               physics: scrollPhysics,
               itemBuilder: (BuildContext context,int index){
-                return new Container(
+                return  new Container(
                   height: 35.0,
                   child: new Center(
                     child: new Text(strs[index],style: new TextStyle(fontSize: 18.0),),

@@ -1,10 +1,11 @@
 # pulltorefresh
 [![pub package](https://img.shields.io/pub/v/pulltorefresh_flutter.svg)](https://pub.dartlang.org/packages/pulltorefresh_flutter)
 
-上下拉控件，理论上适配所有可滑动View, Android IOS 双平台通用. 上下拉分别可控， 可单独使用上拉或下拉； 支持上下拉头完全自定义，现已支持是否加载成功的状态通知
+上下拉控件，理论上适配所有可滑动View, Android IOS 双平台通用. 上下拉分别可控， 可单独使用上拉或下拉； 支持上下拉头完全自定义，现已支持是否加载成功的状态通知，支持通过方法调用触发下拉刷新
 
 A control that make the ScrollView to be pull to refresh and push  to load data. Theoretically compatible with all Scrollable Widgets. RefreshBox now supports full customization
-, Pull and push are separately controllable,can Compatible with Android and IOS, Support for notifications the status of load data whether succeed now
+, Pull and push are separately controllable,can Compatible with Android and IOS, Support for notifications the status of load data whether succeed now,Support for triggering 
+pull-down refresh by method call
 
 如果使用当中有什么问题，请在github里提出个issues,thankYou
 
@@ -14,15 +15,13 @@ If there is any problem with the use, please submit an issue in github,thankYou
 
 #### Contact Me ：OpenFlutter QQ群 892398530
 
-<img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20180813170926.gif"/>
-
 <img width="38%" height="38%" src="https://raw.githubusercontent.com/baoolong/PullToRefresh/master/demonstrationgif/20181023_90359.gif"/>
 
 ## Usage
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  pulltorefresh_flutter: "^0.1.8"
+	  pulltorefresh_flutter: "^0.1.9"
 	  
 如果使用本项目默认图片，请下载 [https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png](https://raw.githubusercontent.com/baoolong/PullToRefresh_Flutter/master/images/refresh.png) 到你的images文件夹下，并在Pubspec.yaml添加如下配置
 	  
@@ -68,6 +67,8 @@ Add it to your dart file:
       int rotationAngle=0;
       String customHeaderTipText="快尼玛给老子松手！";
       String defaultRefreshBoxTipText="快尼玛给老子松手！";
+      ///button等其他方式，通过方法调用触发下拉刷新
+      TriggerPullController triggerPullController=new TriggerPullController();
     
     
       @override
@@ -75,7 +76,12 @@ Add it to your dart file:
         super.initState();
         //这个是刷新时控件旋转的动画，用来使刷新的Icon动起来
         customBoxWaitAnimation=new AnimationController(duration: const Duration(milliseconds: 1000*100), vsync: this);
+        //第一次layout后会被调用
+        //WidgetsBinding.instance.addPostFrameCallback((context){
+        //  triggerPullController.triggerPull();
+        //});
       }
+    
     
       @override
       Widget build(BuildContext context) {
@@ -89,6 +95,7 @@ Add it to your dart file:
               // If there is a RefreshBox is the default（In the case of the RefreshBox Enable）then the default** attributes of the series are valid
               defaultRefreshBoxTipText: defaultRefreshBoxTipText,
               headerRefreshBox: _getCustomHeaderBox(),
+              triggerPullController:triggerPullController,
     
               //你也可以自定义底部的刷新栏；you can customize the bottom refresh box
               animationStateChangedCallback:(AnimationStates animationStates,RefreshBoxDirectionStatus refreshBoxDirectionStatus){
@@ -100,7 +107,7 @@ Add it to your dart file:
                   controller: controller,
                   physics: scrollPhysics,
                   itemBuilder: (BuildContext context,int index){
-                    return new Container(
+                    return  new Container(
                       height: 35.0,
                       child: new Center(
                         child: new Text(strs[index],style: new TextStyle(fontSize: 18.0),),
@@ -132,14 +139,13 @@ Add it to your dart file:
                 new Align(
                   alignment: Alignment.centerLeft,
                   child: new RotatedBox(
-    //                origin: new Offset(45.0/2, 45.0/2),
-    //                transform: Matrix4.rotationX(rotationAngle),
                     quarterTurns: rotationAngle,
                     child: new RotationTransition( //布局中加载时动画的weight
                       child: new Image.asset(
                         customRefreshBoxIconPath,
                         height: 45.0,
                         width: 45.0,
+                        fit:BoxFit.cover,
                       ),
                       turns: new Tween(
                           begin: 100.0,
@@ -238,7 +244,7 @@ Add it to your dart file:
     }
 
 ## Notice
-1. 有时ListView的Item太少而不能铺满屏幕，导致ListView 不可Scroll，PullToRefresh也不可使用，同时为了兼容IOS，所以ScrollPhysics必须是RefreshAlwaysScrollPhysics。
+1. 有时ListView的Item太少而不能铺满屏幕，导致ListView 不可Scroll，PullToRefresh也不可使用，同时为了兼容IOS，所以初始化ScrollPhysics必须是RefreshAlwaysScrollPhysics。
 2. 使用默认的样式可不用写headerRefreshBox和footerRefreshBox属性，若想自定义其中一个，则另一个为默认（默认状态下可用default**系列属性改变其外观：文字颜色等）
 3. isPullEnable、isPushEnable属性可以控制RefreshBox 是否可用，无论是自定义的还是默认的
 
@@ -247,6 +253,9 @@ Add it to your dart file:
 3. The isPullEnable and isPushEnable properties can control whether the RefreshBox is available, whether it is custom or default.
 
 ## Properties
+
+#####     triggerPullController
+    可通过此对象的方法调用触发下拉刷新，triggering pull-down refresh by method call
 
 #####     loadData
     加载数据的回调;callback of data loading

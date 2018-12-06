@@ -1,3 +1,7 @@
+## [0.1.9] - 2018.12.06
+
+* trigger pull to refresh by method call
+
 ## [0.1.8] - 2018.11.30
 
 * Fix some bug
