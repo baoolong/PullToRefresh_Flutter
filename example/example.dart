@@ -190,7 +190,7 @@ class PullAndPushTestState extends State<PullAndPushTest> with TickerProviderSta
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
-        _result = await response.transform(utf8.decoder).join();
+        _result = await utf8.decoder.bind(response).join();
         setState(() {
           //拿到数据后，对数据进行梳理
           if(isPullDown){
